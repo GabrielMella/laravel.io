@@ -33,7 +33,7 @@ final class SyncArticleImage implements ShouldQueue
 
     protected function fetchUnsplashImageDataFromId(Article $article): ?array
     {
-        if (! $article->hero_image_id) {
+        if (! $article->hero_image_id || ! preg_match('/\A[A-Za-z0-9_\-]+\z/', $article->hero_image_id)) {
             return null;
         }
 

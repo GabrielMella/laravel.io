@@ -15,7 +15,7 @@ class ArticleRequest extends Request
     {
         return [
             'title' => ['required', 'max:100'],
-            'hero_image_id' => ['nullable', new RequiredIf(auth()->user()->isVerifiedAuthor())],
+            'hero_image_id' => ['nullable', 'alpha_dash', new RequiredIf(auth()->user()->isVerifiedAuthor())],
             'body' => ['required', new HttpImageRule],
             'tags' => 'array|nullable',
             'tags.*' => 'exists:tags,id',
