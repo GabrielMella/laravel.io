@@ -37,6 +37,10 @@ final class SyncArticleImage implements ShouldQueue
             return null;
         }
 
+        if (! preg_match('/^[A-Za-z0-9_-]+$/', $article->hero_image_id)) {
+            return null;
+        }
+
         $response = Http::retry(3, 100, throw: false)
             ->withToken(config('services.unsplash.access_key'), 'Client-ID')
             ->get("https://api.unsplash.com/photos/{$article->hero_image_id}");
